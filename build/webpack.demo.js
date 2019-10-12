@@ -19,7 +19,7 @@ const webpackConfig = {
     docs: './examples/entry.js'
   } : (isPlay ? './examples/play.js' : './examples/entry.js'),
   output: {
-    path: path.resolve(process.cwd(), './examples/element-ui/'),
+    path: path.resolve(process.cwd(), `./examples/${config.libName}/`),
     publicPath: process.env.CI_ENV || '',
     filename: '[name].[hash:7].js',
     chunkFilename: isProd ? '[name].[hash:7].js' : '[name].js'
@@ -53,21 +53,24 @@ const webpackConfig = {
         test: /\.(jsx?|babel|es6)$/,
         include: process.cwd(),
         exclude: config.jsexclude,
-        loader: 'babel-loader'
+        loaders: ['babel-loader', config.prefixLoader]
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          compilerOptions: {
-            preserveWhitespace: false
+        loaders: [{
+          loader: 'vue-loader',
+          options: {
+            compilerOptions: {
+              preserveWhitespace: false
+            }
           }
-        }
+        }, config.prefixLoader]
       },
       {
         test: /\.(scss|css)$/,
         use: [
           isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+          config.prefixLoader,
           'css-loader',
           'sass-loader'
         ]
@@ -83,6 +86,7 @@ const webpackConfig = {
               }
             }
           },
+          config.prefixLoader,
           {
             loader: path.resolve(__dirname, './md-loader/index.js')
           }
@@ -152,7 +156,7 @@ if (isProd) {
     cacheGroups: {
       vendor: {
         test: /\/src\//,
-        name: 'element-ui',
+        name: config.libName,
         chunks: 'all'
       }
     }

@@ -1,8 +1,21 @@
 const webpackConfig = require('../../build/webpack.test');
 
+// solve chrome crash problem in WSL
+process.env.CHROME_BIN = require('puppeteer').executablePath();
+
 module.exports = function(config) {
   const configuration = {
-    browsers: ['ChromeHeadless'],
+    browsers: ['ChromeHeadlessNoSandbox'],
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: [
+          '--no-sandbox', // required to run without privileges in docker
+          '--disable-site-isolation-trials',
+          '--disable-web-security'
+        ]
+      }
+    },
     frameworks: ['mocha', 'sinon-chai'],
     reporters: ['spec', 'coverage'],
     files: ['./index.js'],
