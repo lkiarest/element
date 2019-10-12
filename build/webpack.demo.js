@@ -53,22 +53,23 @@ const webpackConfig = {
         test: /\.(jsx?|babel|es6)$/,
         include: process.cwd(),
         exclude: config.jsexclude,
-        loaders: ['babel-loader', config.prefixLoader]
+        loaders: ['cache-loader', 'babel-loader', config.prefixLoader]
       },
       {
         test: /\.vue$/,
-        loaders: [{
+        loaders: ['cache-loader', {
           loader: 'vue-loader',
           options: {
             compilerOptions: {
               preserveWhitespace: false
             }
           }
-        }, config.prefixLoader]
+        }, config.demoPrefixLoader]
       },
       {
         test: /\.(scss|css)$/,
         use: [
+          'cache-loader',
           isProd ? MiniCssExtractPlugin.loader : 'style-loader',
           config.prefixLoader,
           'css-loader',
@@ -78,6 +79,7 @@ const webpackConfig = {
       {
         test: /\.md$/,
         use: [
+          'cache-loader',
           {
             loader: 'vue-loader',
             options: {
@@ -94,7 +96,7 @@ const webpackConfig = {
       },
       {
         test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,
-        loader: 'url-loader',
+        loader: ['cache-loader', 'url-loader'],
         // todo: 这种写法有待调整
         query: {
           limit: 10000,

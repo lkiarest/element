@@ -88,3 +88,20 @@ exports.prefixLoader = {
     }]
   }
 };
+
+exports.demoPrefixLoader = {
+  loader: path.resolve(__dirname, 'prefix-loader/index.js'),
+  options: {
+    rules: [
+      ...exports.prefixLoader.options.rules,
+      {
+        from: /https:\/\/github.com\/ElemeFE/ig,
+        to: userConfig.gitRepo
+      },
+      {
+        from: /\bElement\b/g,
+        to: upperFirst(exports.libName)
+      }
+    ]
+  }
+};

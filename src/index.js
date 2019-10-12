@@ -81,8 +81,8 @@ import PageHeader from '../packages/page-header/index.js';
 import CascaderPanel from '../packages/cascader-panel/index.js';
 import Avatar from '../packages/avatar/index.js';
 import Drawer from '../packages/drawer/index.js';
-import locale from 'ix/src/locale';
-import CollapseTransition from 'ix/src/transitions/collapse-transition';
+import locale from 'elx/src/locale';
+import CollapseTransition from 'elx/src/transitions/collapse-transition';
 
 const components = [
   Pagination,

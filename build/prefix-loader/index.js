@@ -8,6 +8,8 @@ module.exports = function(source) {
     return '';
   }
 
+  // const start = new Date();
+
   let { rules } = getOptions(this);
 
   rules = rules.filter(({ from, to }) => from && to && from !== to);
@@ -19,6 +21,8 @@ module.exports = function(source) {
       console.error('[prefixLoader]', e.message);
     }
   });
+
+  // console.log('replace cost:', new Date() - start);
 
   return source;
 };

@@ -84,6 +84,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-2": "^6.24.1",
     "babel-regenerator-runtime": "^6.5.0",
+    "cache-loader": "^4.1.0",
     "chai": "^4.2.0",
     "chokidar": "^1.7.0",
     "copy-webpack-plugin": "^5.0.0",

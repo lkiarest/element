@@ -279,12 +279,3 @@ Vue.use(Button);
 ### 开始使用
 
 至此，一个基于 Vue 和 Element 的开发环境已经搭建完毕，现在就可以编写代码了。各个组件的使用方法请参阅它们各自的文档。
-
-### 使用 Nuxt.js
-
-我们还可以使用 [Nuxt.js](https://nuxtjs.org)：
-
-<div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
-  <iframe src="https://glitch.com/embed/#!/embed/nuxt-with-element?path=nuxt.config.js&previewSize=0&attributionHidden=true" alt="nuxt-with-element on glitch" style="height: 100%; width: 100%; border: 0;"></iframe>
-</div>
-
