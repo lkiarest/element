@@ -79,7 +79,7 @@ const webpackConfig = {
       {
         test: /\.md$/,
         use: [
-          'cache-loader',
+          // 'cache-loader',
           {
             loader: 'vue-loader',
             options: {
@@ -88,7 +88,7 @@ const webpackConfig = {
               }
             }
           },
-          config.prefixLoader,
+          config.demoPrefixLoader,
           {
             loader: path.resolve(__dirname, './md-loader/index.js')
           }
@@ -96,12 +96,14 @@ const webpackConfig = {
       },
       {
         test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,
-        loader: ['cache-loader', 'url-loader'],
-        // todo: 这种写法有待调整
-        query: {
-          limit: 10000,
-          name: path.posix.join('static', '[name].[hash:7].[ext]')
-        }
+        loaders: [{
+          // todo: 这种写法有待调整
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+            name: path.posix.join('static', '[name].[hash:7].[ext]')
+          }
+        }]
       }
     ]
   },
